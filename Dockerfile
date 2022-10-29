@@ -30,7 +30,7 @@ RUN wget -nv -O- https://dl.winehq.org/wine-builds/winehq.key | APT_KEY_DONT_WAR
     && xvfb-run sh wine-init.sh
 
 #Install python for Windows
-RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-.exe -O python.exe \
+RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}.exe -O python.exe \
     && xvfb-run sh -c "\
         wine python.exe /quiet TargetDir=C:\\python \
         Include_doc=0 InstallAllUsers=1 PrependPath=1; \
