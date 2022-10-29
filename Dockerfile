@@ -5,7 +5,7 @@ ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV WINEPREFIX /root/wine
-ENV WINEARCH win32
+ENV WINEARCH win64
 ENV WINEDEBUG -all
 
 ARG PYTHON_VERSION=3.10.8
@@ -30,9 +30,16 @@ RUN wget -nv -O- https://dl.winehq.org/wine-builds/winehq.key | APT_KEY_DONT_WAR
     && xvfb-run sh wine-init.sh
 
 #Install python for Windows
-RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}.exe -O python.exe \
+RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe -O python.exe \
     && xvfb-run sh -c "\
-        wine python.exe /quiet TargetDir=C:\\python \
+        wine python.exe /quiet TargetDir=C:\\Python \
+        Include_doc=0 InstallAllUsers=1 PrependPath=1; \
+        wineserver -w" \
+    && rm python.exe \
+    && wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}.exe -O python.exe \
+    && xvfb-run sh -c "\
+        wine python.exe /quiet TargetDir=C:\\PythonX86 \
         Include_doc=0 InstallAllUsers=1 PrependPath=1; \
         wineserver -w" \
     && rm python.exe
+
