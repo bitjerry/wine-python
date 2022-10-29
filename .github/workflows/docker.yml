@@ -3,8 +3,9 @@ name: Publish Wine-Python
 
 on:
   push:
-    tags: ["v*"]
-  workflow_dispatch:
+    tags:
+      - v*
+#  workflow_dispatch:
 
 jobs:
 
