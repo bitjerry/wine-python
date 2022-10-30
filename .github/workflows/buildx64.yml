@@ -1,5 +1,5 @@
 # docker-image.yml
-name: winepy
+name: winepy64
 
 on:
   workflow_dispatch:
