@@ -44,5 +44,5 @@ jobs:
         with:
           username: idiotdocker
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: peterevans/dockerhub-description
+          repository: idiotdocker/winepy
           short-description: ${{ github.event.repository.description }}
