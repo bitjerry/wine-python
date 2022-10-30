@@ -32,17 +32,17 @@ jobs:
             type=semver,pattern={{version}}
 
       - name: Build and push
-          uses: docker/build-push-action@v3 # docker build & push
-          with:
-            context: .
-            push: true
-            tags: ${{ steps.meta.outputs.tags }}
-            labels: ${{ steps.meta.outputs.labels }}
+        uses: docker/build-push-action@v3 # docker build & push
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Docker Hub Description
-          uses: peter-evans/dockerhub-description@v3
-          with:
-            username: idiotdocker
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
-            repository: peterevans/dockerhub-description
-            short-description: ${{ github.event.repository.description }}
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: idiotdocker
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: peterevans/dockerhub-description
+          short-description: ${{ github.event.repository.description }}
