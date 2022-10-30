@@ -12,11 +12,10 @@ ARG PYTHON_VERSION=3.10.8
 
 #Install Tool
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        ca-certificates \
+    && apt-get install -y --install-recommends \
+        software-properties-common \
         wget \
-        xvfb \
-        gnupg
+        xvfb
 
 #Intall Wine
 COPY wine-init.sh /
@@ -25,7 +24,7 @@ RUN wget -nv -O- https://dl.winehq.org/wine-builds/winehq.key | APT_KEY_DONT_WAR
     && echo "deb https://dl.winehq.org/wine-builds/ubuntu/ $(grep VERSION_CODENAME= /etc/os-release | cut -d= -f2) main" >> /etc/apt/sources.list \
     && dpkg --add-architecture i386 \
     && apt-get update \
-    && apt-get install -y --install-recommends winehq-stable \
+    && apt-get install -y --no-install-recommends winehq-stable \
     && rm -rf /var/lib/apt/lists/* \
     && xvfb-run sh wine-init.sh
 
@@ -36,3 +35,7 @@ RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VER
         Include_doc=0 InstallAllUsers=1 PrependPath=1; \
         wineserver -w" \
     && rm python.exe
+
+#Clear
+RUN apt-get autoremove -y --purge software-properties-common wget \
+    && apt-get clean -y

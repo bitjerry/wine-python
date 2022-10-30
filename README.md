@@ -17,7 +17,7 @@ Does not include the full Windows environment
 
 If you have more requirements, please modify the `Dockerfile`
 
-Read in other languages: English | [简体中文](./README.zh_cn.md)
+Read in other languages: English | [简体中文](https://github.com/bitjerry/wine-python/blob/main/README.zh_cn.md)
 
 ---
 
@@ -38,4 +38,4 @@ xvfb-run sh -c "\
 ### Copyright
 
 ---
-MIT © [bitjerry](./LICENSE)
+MIT © [bitjerry](https://github.com/bitjerry/wine-python/blob/main/LICENSE)
