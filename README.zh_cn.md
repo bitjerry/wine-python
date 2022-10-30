@@ -11,7 +11,7 @@ Docker 便于将程序快速部署到任何环境中, 包括 Paas 平台
 Wine 某些程序必须在 Windows 环境下执行  
 Python 毫无疑问, 最简单的编程语言  
 
-仅用于 `Python 3.10.8 32bit for Windows`  
+仅用于 `Python 3.10.8 32bit for Windows`, 最小镜像python运行环境!!!  
 不包含完整 Windows 环境  
 如有更多需求请自行修改 Dockerfile
 
@@ -30,7 +30,7 @@ wine python ...
 #### 使用pip安装依赖
 ```shell
 xvfb-run sh -c "\
-  wine pip install -r requirements.txt; \
+  wine pip install --no-cache-dir -r requirements.txt; \
   wineserver -w"
 ```
 

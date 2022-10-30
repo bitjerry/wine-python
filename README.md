@@ -11,7 +11,7 @@ Docker is easy to deploy in any environment, such as the Paas
 Wine Some programs must be executed under Windows  
 Python is a very easy to use and popular programming language
 
-For `Python 3.10.8 32bit for Windows` only
+For `Python 3.10.8 32bit for Windows` only, minimum image for python runtime!!!  
 
 Does not include the full Windows environment
 
@@ -31,7 +31,7 @@ wine python ...
 #### Install requirements by pip
 ```shell
 xvfb-run sh -c "\
-  wine pip install -r requirements.txt; \
+  wine pip install --no-cache-dir -r requirements.txt; \
   wineserver -w"
 ```
 
