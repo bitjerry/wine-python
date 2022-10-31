@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM amd64/debian:buster-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
@@ -8,8 +8,7 @@ ENV WINEPREFIX /root/.wine
 ENV WINEARCH win64
 ENV WINEDEBUG -all
 
-ARG PYTHON_VERSION=3.10.8
-
+#Install Tool
 RUN apt-get update \
     && apt-get install -y --install-recommends ca-certificates gnupg wget xvfb \
     && wget -nv -O- https://dl.winehq.org/wine-builds/winehq.key | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
@@ -18,18 +17,13 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests winehq-stable \
     && rm -rf /var/lib/apt/lists/* \
-    && xvfb-run sh -c "\
-        set -e; \
-        export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml="; \
-        wine reg add 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d 10.0 /f; \
-        wine reg add 'HKCU\Software\Wine\DllOverrides' /v winemenubuilder.exe /t REG_SZ /d '' /f; \
-        wine reg add 'HKCU\Software\Wine\DllOverrides' /v mscoree /t REG_SZ /d '' /f; \
-        wine reg add 'HKCU\Software\Wine\DllOverrides' /v mshtml /t REG_SZ /d '' /f; \
-        wineserver -w" \
-    && wget https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe -O python.exe \
+    && wine reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v CurrentVersion /d 10.0 /f \
+    && wget https://www.python.org/ftp/python/3.10.8/python-3.10.8-amd64.exe -O python.exe \
     && xvfb-run sh -c "\
         wine python.exe /quiet TargetDir=C:\\Python \
-        Include_doc=0 InstallAllUsers=1 PrependPath=1; \
+        Include_doc=0 InstallAllUsers=1 PrependPath=1 \
+        Include_launcher=0 Include_tcltk=0 Include_test=0 \
+        Include_tools=0 Shortcuts=0 Include_debug=0 Include_dev=0; \
         wineserver -w" \
     && rm python.exe \
     && apt-get autoremove -y --purge ca-certificates gnupg wget \

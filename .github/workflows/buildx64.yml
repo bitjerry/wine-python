@@ -30,6 +30,8 @@ jobs:
           images: idiotdocker/winepy64
           tags: |
             type=semver,pattern={{version}}
+            type=raw,value=test,enable=${{ github.ref == format('refs/heads/{0}', 'test') }}
+            type=raw,value=dev,enable=${{ github.ref == format('refs/heads/{0}', 'dev') }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
