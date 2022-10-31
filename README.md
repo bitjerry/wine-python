@@ -30,9 +30,7 @@ wine python ...
 
 #### Install requirements by pip
 ```shell
-xvfb-run sh -c "\
-  wine pip install --no-cache-dir -r requirements.txt; \
-  wineserver -w"
+wine pip install --no-cache-dir -r requirements.txt
 ```
 
 ### Copyright

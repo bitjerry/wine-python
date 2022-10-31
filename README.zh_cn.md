@@ -29,9 +29,7 @@ wine python ...
 
 #### 使用pip安装依赖
 ```shell
-xvfb-run sh -c "\
-  wine pip install --no-cache-dir -r requirements.txt; \
-  wineserver -w"
+wine pip install --no-cache-dir -r requirements.txt
 ```
 
 ### 许可
