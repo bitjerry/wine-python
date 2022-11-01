@@ -1,5 +1,5 @@
 # docker-image.yml
-name: winepy64-embed
+name: winepy-embed
 
 on:
   workflow_dispatch:
@@ -27,16 +27,17 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: idiotdocker/winepy64-embed
+          images: idiotdocker/winepy-embed
           tags: |
             type=semver,pattern={{version}}
-            type=raw,value=test,enable=${{ github.ref == format('refs/heads/{0}', 'test') }}
-            type=raw,value=dev,enable=${{ github.ref == format('refs/heads/{0}', 'dev') }}
+            type=raw,value=v1.0.0
+            type=raw,value=test,enable=${{ github.ref == refs/heads/test }}
+            type=raw,value=dev,enable=${{ github.ref == refs/heads/dev }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v3 # docker build & push
         with:
-          context: ./x64
+          context: ./x86
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -46,6 +47,6 @@ jobs:
         with:
           username: idiotdocker
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: idiotdocker/winepy64
-          readme-filepath: ./x64/README.md
+          repository: idiotdocker/winepy-embed
+          readme-filepath: ./x86/README.md
           short-description: ${{ github.event.repository.description }}
