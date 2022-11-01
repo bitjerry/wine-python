@@ -47,4 +47,5 @@ jobs:
           username: idiotdocker
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: idiotdocker/winepy
+          readme-filepath: ./x86/README.md
           short-description: ${{ github.event.repository.description }}
