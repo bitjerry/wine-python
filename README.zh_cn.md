@@ -1,4 +1,4 @@
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/bitjerry/wine-python/img/logo.png" alt="screenshots"></p>
+<p align="center"><img src="https://cdn.jsdelivr.net/gh/bitjerry/wine-python@main/img/logo.png" alt="screenshots"></p>
 
 [![Star](https://img.shields.io/github/stars/bitjerry/wine-python?logo=github&style=flat-square)](https://github.com/bitjerry/wine-python)
 [![Forks](https://img.shields.io/github/forks/bitjerry/wine-python?logo=github&style=flat-square)](https://github.com/bitjerry/wine-python)
