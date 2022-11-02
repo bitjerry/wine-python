@@ -17,6 +17,6 @@ RUN wget -nc -O python.zip https://www.python.org/ftp/python/3.10.8/python-3.10.
     rm python.zip
     
 RUN wget -nc https://bootstrap.pypa.io/get-pip.py &&\
-    wine python get-pip.py  --no-setuptools &&\
+    wine python get-pip.py &&\
 	wineserver -w &&\
     rm get-pip.py
