@@ -30,7 +30,7 @@ jobs:
           images: idiotdocker/winepy64-embed
           tags: |
             type=semver,pattern={{version}}
-            type=raw,value=v1.0.3, enable=true
+            type=raw,value=latest, enable=true
             type=raw,value=test,enable=${{ github.ref == format('refs/heads/{0}', 'test') }}
             type=raw,value=dev,enable=${{ github.ref == format('refs/heads/{0}', 'dev') }}
 
