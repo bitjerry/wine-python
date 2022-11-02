@@ -1,6 +1,5 @@
 FROM amd64/debian:buster-slim
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV WINEDLLOVERRIDES 'winemenubuilder.exe,mscoree,mshtml=d'
 ENV LANG en_US.UTF-8
 ENV WINEPREFIX /root/.wine
