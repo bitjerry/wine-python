@@ -11,11 +11,14 @@ ENV WINEPATH C:/python;C:/python/Scripts
 WORKDIR ${WINEPREFIX}/drive_c/python
 
 RUN apk add --update --no-cache wine xvfb-run &&\
-    xvfb-run sh -c "wine64 reg add 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d 10.0 /f; wineserver -w" &&\
-    wget -nc -O python.zip https://www.python.org/ftp/python/3.10.8/python-3.10.8-embed-amd64.zip &&\
+    ln -s /usr/bin/wine64 /usr/bin/wine &&\
+    xvfb-run sh -c "wine reg add 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d 10.0 /f; wineserver -w"
+    
+RUN wget -nc -O python.zip https://www.python.org/ftp/python/3.10.8/python-3.10.8-embed-amd64.zip &&\
     unzip python.zip &&\
     echo "import site" >>$(find . -type f -name "*._pth") &&\
-    wget -nc https://bootstrap.pypa.io/get-pip.py &&\
+    rm python.zip
+    
+RUN wget -nc https://bootstrap.pypa.io/get-pip.py &&\
     xvfb-run sh -c "wine64 python get-pip.py; wineserver -w" &&\
-    ln -s /usr/bin/wine64 /usr/bin/wine &&\
-    rm get-pip.py python.zip
+    rm get-pip.py
